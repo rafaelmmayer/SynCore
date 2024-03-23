@@ -1,3 +1,6 @@
+watch:
+	dotnet watch run --project src/SynCore.Api
+
 run:
 	dotnet watch run --project src/SynCore.Api
 
