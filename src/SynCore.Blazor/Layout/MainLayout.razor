@@ -1,17 +1,40 @@
-﻿@inherits LayoutComponentBase
+﻿@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inherits LayoutComponentBase
 
-<div class="page">
-    <div class="sidebar">
-        <NavMenu/>
-    </div>
+<MudThemeProvider/>
+<MudDialogProvider/>
+<MudSnackbarProvider/>
 
-    <main>
-        <div class="top-row px-4">
-            <a href="https://learn.microsoft.com/aspnet/core/" target="_blank">About</a>
+<div style="height: 100vh">
+    <AuthorizeView>
+        <div>
+            <NavMenu/>
         </div>
+    </AuthorizeView>
 
-        <article class="content px-4">
-            @Body
-        </article>
+    <main style="height: 100%">
+        @Body
     </main>
 </div>
+
+@code {
+    [CascadingParameter] public Task<AuthenticationState> AuthenticationState { get; set; }
+    [Inject] public NavigationManager NavigationManager { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        if (await IsAuthenticated() == false)
+        {
+            NavigationManager.NavigateTo("/sign-in");
+        }
+    }
+
+    private async Task<bool> IsAuthenticated()
+    {
+        var authState = await AuthenticationState;
+        var user = authState?.User;
+
+        return user?.Identity is not null && user.Identity.IsAuthenticated;
+    }
+
+}

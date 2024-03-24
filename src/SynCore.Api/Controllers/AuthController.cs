@@ -18,7 +18,7 @@ public class AuthController : Controller
         _sender = sender;
     }
 
-    [HttpPost("signup")]
+    [HttpPost("sign-up")]
     public async Task<IActionResult> SignUp([FromForm] SignUp.Command command, CancellationToken cancellationToken)
     {
         var user = await _sender.Send(command, cancellationToken);
@@ -26,9 +26,9 @@ public class AuthController : Controller
         return Ok(user);
     }
     
-    [HttpPost("login")]
+    [HttpPost("sign-in")]
     public async Task<IActionResult> Login(
-        [FromForm] Login.Command command, 
+        [FromForm] SignIn.Command command, 
         CancellationToken cancellationToken)
     {
         var user = await _sender.Send(command, cancellationToken);
@@ -48,5 +48,15 @@ public class AuthController : Controller
             new ClaimsPrincipal(identity));
 
         return Ok(user);
+    }
+
+    [HttpGet("me")]
+    public IActionResult Me()
+    {
+        var claims = HttpContext.User.Claims
+            .Select(c => new { c.Type, c.Value })
+            .ToArray();
+
+        return Ok(claims);
     }
 }

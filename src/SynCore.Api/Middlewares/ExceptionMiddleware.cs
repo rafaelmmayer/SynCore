@@ -19,7 +19,7 @@ public class ExceptionMiddleware : IMiddleware
         }
         catch (AppException e)
         {
-            _logger.LogError(e, "Status: {Status} - Mensagem: {Message}", e.Status, e.Message);
+            _logger.LogError("Status: {Status} - Mensagem: {Message}", e.Status, e.Message);
             
             context.Response.StatusCode = e.Status;
             await context.Response.WriteAsync(e.Message);

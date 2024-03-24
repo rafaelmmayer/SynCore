@@ -1,6 +1,6 @@
 ## Ferramentas necessárias
 
-* .Net 8 Sdk
+* .Net 7 Sdk
 ``` sh
 winget install Microsoft.DotNet.SDK.7
 ```

@@ -1,5 +1,7 @@
 ﻿using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
+using SynCore.Api.Common.Exceptions;
 using SynCore.Api.Data;
 using SynCore.Core.Entities;
 
@@ -63,6 +65,16 @@ public static class SignUp
 
         public async Task<User> Handle(Command request, CancellationToken cancellationToken)
         {
+            if (await _appDbContext.Users.AnyAsync(u => u.Cpf == request.Cpf, cancellationToken))
+            {
+                throw new AppException(StatusCodes.Status409Conflict, "cpf já cadastrado");
+            }
+            
+            if (await _appDbContext.Users.AnyAsync(u => u.Email == request.Email, cancellationToken))
+            {
+                throw new AppException(StatusCodes.Status409Conflict, "e-mail já cadastrado");
+            }
+            
             var user = new User
             {
                 Id = Guid.NewGuid(),

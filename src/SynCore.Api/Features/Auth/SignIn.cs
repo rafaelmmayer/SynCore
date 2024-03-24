@@ -7,7 +7,7 @@ using SynCore.Core.Entities;
 
 namespace SynCore.Api.Features.Auth;
 
-public static class Login
+public static class SignIn
 {
     public class Command : IRequest<User>
     {

@@ -1,0 +1,37 @@
+﻿@page "/sign-in"
+
+<div style="height: 100%; display: grid; place-items: center">
+    <form style="width: 500px;" @onsubmit:preventDefault @onsubmit="HandleSubmit">
+        <MudTextField
+            T="string"
+            @bind-Value="Email"
+            Variant="Variant.Outlined"
+            Margin="Margin.Dense"
+            Label="E-mail"/>
+        <MudTextField
+            T="string"
+            @bind-Value="Password"
+            Variant="Variant.Outlined"
+            Margin="Margin.Dense"
+            Label="Senha"/>
+        <MudButton ButtonType="ButtonType.Submit">Login</MudButton>
+    </form>
+</div>
+
+@code {
+    [Inject] public HttpClient Client { get; set; }
+    
+    private string Email { get; set; }
+    private string Password { get; set; }
+
+    private async Task HandleSubmit()
+    {
+        var contentKeys = new Dictionary<string, string>()
+        {
+            { "email", Email },
+            { "password", Password }
+        };
+        var content = new FormUrlEncodedContent(contentKeys);
+        await Client.PostAsync("/api/auth/sign-in", content);
+    }
+}

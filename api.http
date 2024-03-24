@@ -1,6 +1,6 @@
 @base_url=http://localhost:5003/api
 
-POST {{base_url}}/auth/signup
+POST {{base_url}}/auth/sign-up
 Content-Type: application/x-www-form-urlencoded
 
 name=Rafael
@@ -11,8 +11,12 @@ name=Rafael
 &password=mayer123
 
 ###
-POST {{base_url}}/auth/login
+POST {{base_url}}/auth/sign-in
 Content-Type: application/x-www-form-urlencoded
 
 email=rafa.mayer67@gmail.com
 &password=mayer123
+
+###
+GET {{base_url}}/auth/me
+Cookie: .AspNetCore.Cookies=CfDJ8Bk1Q_cyBgRFqVjXa2GrmAILVD4NCNIntVGF3oCShD6EFYshGdE-jZ6lPoTbR_e4nW2XgoG8lyFyRAh2kq14_S2CQI2xFIaZGJoVBbBUKZY8u2QiiJ8O11GPaRwppVTsnTDh3gFvO40gDwCvqXKo_NCToh4zp-EvV4QqGRTMaBo-rQlOBk32YC1tJTC_gP9NCJrtA8khCvD6PfD02-jYVswXt7LiQkzjIEjkN4hmuDsGpYTVUv1WM9qVt447Y0mgGo1uIKJyMVkNAO9FRRghf5kz19TGbORkLbuVjGUMeRLsfg-NAzq6OG3YvIj4Zw87jLGVZuDG7W6tCOwLxYanTFuljUsfIndNUjkDuGUAvwa11HIlw94q3owp2zUeW762z8vz_iaSumGseTJxgGiCrp2TaKYsx6gbIJyCohDJWDezRq3GChlm91rtK_XEo-Bn8rbUACLc9-Ujii1FOSxQwQA

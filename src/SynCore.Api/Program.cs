@@ -1,4 +1,5 @@
 using Carter;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using SynCore.Api.Data;
@@ -21,10 +22,28 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddCarter();
 builder.Services.AddControllers();
 builder.Services.AddScoped<ExceptionMiddleware>();
+builder.Services
+    .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+    .AddCookie(op =>
+    {
+        if (builder.Environment.IsProduction())
+        {
+            op.Cookie.Domain = builder.Configuration.GetValue<string>("Cookie:Domain");
+            op.ExpireTimeSpan = TimeSpan.FromDays(3);
+            op.Cookie.MaxAge = op.ExpireTimeSpan;
+            op.SlidingExpiration = true;
+        }
+        op.Cookie.SecurePolicy = CookieSecurePolicy.None;
+    });
+builder.Services.AddAuthorization();
+builder.Services.AddCors();
 
 var app = builder.Build();
 
 app.UseMiddleware<ExceptionMiddleware>();
+
+app.UseAuthentication();
+app.UseAuthorization();
 
 if (app.Environment.IsDevelopment())
 {
