@@ -35,8 +35,9 @@ public class AuthController : Controller
         
         var claims = new List<Claim>()
         {
-            new(ClaimTypes.NameIdentifier, user.Email),
-            new(ClaimTypes.Name, $"{user.Name} {user.LastName}"),
+            new("id", user.Id.ToString()),
+            new("email", user.Email),
+            new("name", $"{user.Name} {user.LastName}"),
             new("college", user.CollegeName),
         };
         
@@ -47,7 +48,15 @@ public class AuthController : Controller
             CookieAuthenticationDefaults.AuthenticationScheme,
             new ClaimsPrincipal(identity));
 
-        return Ok(user);
+        return Ok();
+    }
+
+    [HttpPost("sign-out")]
+    public async Task<IActionResult> SignOutHandler()
+    {
+        await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+        return Ok();
     }
 
     [HttpGet("me")]
@@ -59,4 +68,5 @@ public class AuthController : Controller
 
         return Ok(claims);
     }
+    
 }

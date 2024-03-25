@@ -1,4 +1,3 @@
-using Carter;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
@@ -19,7 +18,6 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 {
     options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres"));
 });
-builder.Services.AddCarter();
 builder.Services.AddControllers();
 builder.Services.AddScoped<ExceptionMiddleware>();
 builder.Services
@@ -45,16 +43,8 @@ app.UseMiddleware<ExceptionMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 
-if (app.Environment.IsDevelopment())
-{
-    app.UseWebAssemblyDebugging();
-}
-
-app.UseBlazorFrameworkFiles();
-app.UseStaticFiles();
-
-app.MapFallbackToFile("index.html");
-
 app.MapControllers();
+
+app.MapGet("/", () => "Hello world");
 
 app.Run();
