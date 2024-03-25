@@ -17,6 +17,16 @@ public class ExceptionMiddleware : IMiddleware
         {
             await next.Invoke(context);
         }
+        catch (FluentValidation.ValidationException e)
+        {
+            _logger.LogError("Status: {Status} - Mensagem: {Message}", 403, e.Message);
+            
+            context.Response.StatusCode = 403;
+            await context.Response.WriteAsJsonAsync(new
+            {
+                error = e.Errors
+            });
+        }
         catch (AppException e)
         {
             _logger.LogError("Status: {Status} - Mensagem: {Message}", e.Status, e.Message);

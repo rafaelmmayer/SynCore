@@ -46,25 +46,29 @@ public static class SignUp
                 .NotEmpty();
             
             RuleFor(p => p.Password).Cascade(CascadeMode.Continue)
-                .NotEmpty().WithMessage("Não pode ser vazia.")
-                .MinimumLength(8).WithMessage("Deve conter pelo menos 8 caracteres.")
-                .Matches("[A-Z]+").WithMessage("Deve conter pelo menos uma letra maiúscula.")
-                .Matches("[a-z]+").WithMessage("Deve conter pelo menos uma letra minúscula.")
-                .Matches("[0-9]+").WithMessage("Deve conter pelo menos um número.");
+                .NotEmpty().WithMessage("Senha não pode ser vazia.")
+                .MinimumLength(8).WithMessage("Senha deve conter pelo menos 8 caracteres.")
+                .Matches("[A-Z]+").WithMessage("Senha deve conter pelo menos uma letra maiúscula.")
+                .Matches("[a-z]+").WithMessage("Senha deve conter pelo menos uma letra minúscula.")
+                .Matches("[0-9]+").WithMessage("Senha deve conter pelo menos um número.");
         }
     }
     
     public class Handler : IRequestHandler<Command, User>
     {
         private readonly AppDbContext _appDbContext;
+        private readonly IValidator<Command> _validator;
 
-        public Handler(AppDbContext appDbContext)
+        public Handler(AppDbContext appDbContext, IValidator<Command> validator)
         {
             _appDbContext = appDbContext;
+            _validator = validator;
         }
 
         public async Task<User> Handle(Command request, CancellationToken cancellationToken)
         {
+            await _validator.ValidateAndThrowAsync(request, cancellationToken);
+            
             if (await _appDbContext.Users.AnyAsync(u => u.Cpf == request.Cpf, cancellationToken))
             {
                 throw new AppException(StatusCodes.Status409Conflict, "cpf já cadastrado");

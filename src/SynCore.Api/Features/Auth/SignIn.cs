@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using SynCore.Api.Common.Exceptions;
 using SynCore.Api.Data;
 using SynCore.Core.Entities;
+using ValidationException = FluentValidation.ValidationException;
 
 namespace SynCore.Api.Features.Auth;
 
@@ -33,14 +34,18 @@ public static class SignIn
     public class Handler : IRequestHandler<Command, User>
     {
         private readonly AppDbContext _appDbContext;
+        private readonly IValidator<Command> _validator;
 
-        public Handler(AppDbContext appDbContext)
+        public Handler(AppDbContext appDbContext, IValidator<Command> validator)
         {
             _appDbContext = appDbContext;
+            _validator = validator;
         }
 
         public async Task<User> Handle(Command request, CancellationToken cancellationToken)
         {
+            await _validator.ValidateAndThrowAsync(request, cancellationToken);
+            
             var user = await _appDbContext.Users
                 .AsNoTracking()
                 .FirstOrDefaultAsync(u => u.Email == request.Email, cancellationToken);

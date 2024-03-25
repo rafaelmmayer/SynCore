@@ -2,6 +2,7 @@
 import {ref} from "vue";
 import {useAuthUser} from "@/composables/authUser";
 import {useRouter} from "vue-router";
+import {AxiosError} from "axios";
 
 const userInputs = ref({
   name: '',
@@ -11,6 +12,10 @@ const userInputs = ref({
   collegeName: '',
   password : '',
 })
+const errors = ref<{
+  errorCode?: string,
+  errorMessage: string,
+}[]>([])
 
 const authUser = useAuthUser()
 const router = useRouter()
@@ -20,6 +25,23 @@ async function handleSignUp() {
     await authUser.SignUp({...userInputs.value})
     await router.push('/auth/sign-in')
   } catch (error) {
+    if(error instanceof AxiosError) {
+      if (error.response) {
+        if(error.response.status === 403){
+          errors.value = error.response.data.error
+        }
+        else if (error.response.status === 409){
+          errors.value = [
+            { errorMessage: error.response.data }
+          ]
+        }
+        else {
+          errors.value = [
+            { errorMessage: 'erro não mapeado' }
+          ]
+        }
+      }
+    }
     console.error(error)
   }
 }
@@ -27,7 +49,8 @@ async function handleSignUp() {
 
 <template>
   <h1>Cadastro</h1>
-  <form @submit.prevent="handleSignUp">
+  <RouterLink to="/auth/sign-in">Login</RouterLink>
+  <form style="margin-top: 16px" @submit.prevent="handleSignUp">
     <label>
       Nome
       <input v-model="userInputs.name"/>
@@ -56,7 +79,11 @@ async function handleSignUp() {
       Cadastrar
     </button>
   </form>
-  <RouterLink to="/auth/sign-in">Login</RouterLink>
+  <div v-if="errors">
+    <p style="color: red" v-for="error in errors" :key="error.errorMessage">
+      {{error.errorMessage}}
+    </p>
+  </div>
 </template>
 
 <style scoped>
@@ -68,6 +95,7 @@ form {
 }
 label {
   display: flex;
+  gap: 4px;
   flex-direction: column;
 }
 button {
