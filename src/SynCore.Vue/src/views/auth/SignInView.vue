@@ -42,20 +42,12 @@ async function handleSubmit() {
   <h1>Login</h1>
   <RouterLink to="/auth/sign-up">Cadastro</RouterLink>
   <form style="margin-top: 16px" @submit.prevent="handleSubmit" >
-    <label>
-      Email
-      <input v-model="userCredentials.email">
-    </label>
-    <label>
-      <div style="display: flex">
-        <span style="flex-grow: 1">Senha</span>
-        <RouterLink to="/auth/email-password-reset">Esqueceu a senha?</RouterLink>
-      </div>
-      <input v-model="userCredentials.password">
-    </label>
-    <button type="submit">
+    <VTextField label="E-mail" variant="outlined" v-model="userCredentials.email" type="email" density="compact"/>
+    <VTextField label="Senha" variant="outlined" v-model="userCredentials.password" type="password" density="compact"/>
+    <router-link to="/auth/email-password-reset">Esqueceu a senha?</router-link>
+    <v-btn type="submit" elevation="0" color="primary">
       Login
-    </button>
+    </v-btn>
   </form>
   <div v-if="errors">
     <p style="color: red" v-for="error in errors" :key="error.errorMessage">

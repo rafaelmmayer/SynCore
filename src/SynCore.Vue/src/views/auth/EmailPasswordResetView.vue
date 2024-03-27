@@ -3,14 +3,14 @@
 </script>
 
 <template>
-<form>
-  <label>
+<form @submit.prevent>
+  <label for="resetEmail">
     Digite o endereço de e-mail da sua conta da que iremos enviar um link de redefinição de senha.
-    <input type="email" class="input" name="email">
   </label>
-  <button type="submit">
+  <VTextField variant="outlined" id="resetEmail" name="resetEmail" type="email" density="compact"/>
+  <v-btn type="submit" elevation="0" color="primary">
     Enviar
-  </button>
+  </v-btn>
 </form>
 </template>
 

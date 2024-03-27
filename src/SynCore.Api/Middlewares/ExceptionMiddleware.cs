@@ -19,7 +19,7 @@ public class ExceptionMiddleware : IMiddleware
         }
         catch (FluentValidation.ValidationException e)
         {
-            _logger.LogError("Status: {Status} - Mensagem: {Message}", 403, e.Message);
+            _logger.LogInformation("Status: {Status} - Mensagem: {Message}", 403, e.Message);
             
             context.Response.StatusCode = 403;
             await context.Response.WriteAsJsonAsync(new
@@ -29,7 +29,7 @@ public class ExceptionMiddleware : IMiddleware
         }
         catch (AppException e)
         {
-            _logger.LogError("Status: {Status} - Mensagem: {Message}", e.Status, e.Message);
+            _logger.LogInformation("Status: {Status} - Mensagem: {Message}", e.Status, e.Message);
             
             context.Response.StatusCode = e.Status;
             await context.Response.WriteAsync(e.Message);

@@ -27,8 +27,10 @@ export function useAuthUser(){
         params.append('email', args.email);
         params.append('password', args.password);
         await axios.post('/api/auth/sign-in', params)
+
         const me = await Me()
         user.value = new User(me)
+
         isAuthenticate.value = true
     }
 

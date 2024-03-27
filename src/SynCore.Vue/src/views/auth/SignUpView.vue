@@ -11,6 +11,7 @@ const userInputs = ref({
   cpf: '',
   collegeName: '',
   password : '',
+  confirmPassword : '',
 })
 const errors = ref<{
   errorCode?: string,
@@ -51,33 +52,18 @@ async function handleSignUp() {
   <h1>Cadastro</h1>
   <RouterLink to="/auth/sign-in">Login</RouterLink>
   <form style="margin-top: 16px" @submit.prevent="handleSignUp">
-    <label>
-      Nome
-      <input v-model="userInputs.name"/>
-    </label>
-    <label>
-      Sobrenome
-      <input v-model="userInputs.lastName"/>
-    </label>
-    <label>
-      Email
-      <input v-model="userInputs.email"/>
-    </label>
-    <label>
-      CPF
-      <input v-model="userInputs.cpf"/>
-    </label>
-    <label>
-      Faculdade
-      <input v-model="userInputs.collegeName"/>
-    </label>
-    <label>
-      Senha
-      <input v-model="userInputs.password"/>
-    </label>
-    <button type="submit">
+    <VTextField label="Nome" variant="outlined" v-model="userInputs.name" density="compact"/>
+    <VTextField label="Sobrenome" variant="outlined" v-model="userInputs.lastName" density="compact"/>
+    <VTextField label="E-mail" variant="outlined" v-model="userInputs.email" type="email" density="compact"/>
+    <VTextField label="CPF" variant="outlined" v-model="userInputs.cpf" density="compact"/>
+    <div style="grid-column: span 2">
+      <VTextField label="Faculdade" variant="outlined" v-model="userInputs.collegeName" density="compact"/>
+    </div>
+    <VTextField label="Senha" variant="outlined" v-model="userInputs.password" type="password" density="compact"/>
+    <VTextField label="Confirme a senha" variant="outlined" v-model="userInputs.confirmPassword" type="password" density="compact"/>
+    <v-btn type="submit" elevation="0" color="primary">
       Cadastrar
-    </button>
+    </v-btn>
   </form>
   <div v-if="errors">
     <p style="color: red" v-for="error in errors" :key="error.errorMessage">

@@ -24,26 +24,21 @@ public static class SignUp
         public Validator()
         {
             RuleFor(c => c.Name)
-                .NotNull()
-                .NotEmpty();
+                .NotEmpty().WithMessage("Nome não pode ser vazio");
             
             RuleFor(c => c.LastName)
-                .NotNull()
-                .NotEmpty();
+                .NotEmpty().WithMessage("Sobrenome não pode ser vazio");
             
-            RuleFor(c => c.Cpf)
-                .NotNull()
-                .NotEmpty()
-                .IsValidCPF();
+            RuleFor(c => c.Cpf).Cascade(CascadeMode.Stop)
+                .NotEmpty().WithMessage("CPF inválido")
+                .IsValidCPF().WithMessage("CPF inválido");
 
             RuleFor(c => c.Email)
-                .NotNull()
-                .NotEmpty()
-                .EmailAddress();
+                .NotEmpty().WithMessage("E-mail inválido")
+                .EmailAddress().WithMessage("E-mail inválido");
             
             RuleFor(c => c.CollegeName)
-                .NotNull()
-                .NotEmpty();
+                .NotEmpty().WithMessage("Faculdade não pode ser vazio");
             
             RuleFor(p => p.Password).Cascade(CascadeMode.Continue)
                 .NotEmpty().WithMessage("Senha não pode ser vazia.")
@@ -69,12 +64,12 @@ public static class SignUp
         {
             await _validator.ValidateAndThrowAsync(request, cancellationToken);
             
-            if (await _appDbContext.Users.AnyAsync(u => u.Cpf == request.Cpf, cancellationToken))
+            if (await _appDbContext.Users.AsNoTracking().AnyAsync(u => u.Cpf == request.Cpf, cancellationToken))
             {
                 throw new AppException(StatusCodes.Status409Conflict, "cpf já cadastrado");
             }
             
-            if (await _appDbContext.Users.AnyAsync(u => u.Email == request.Email, cancellationToken))
+            if (await _appDbContext.Users.AsNoTracking().AnyAsync(u => u.Email == request.Email, cancellationToken))
             {
                 throw new AppException(StatusCodes.Status409Conflict, "e-mail já cadastrado");
             }

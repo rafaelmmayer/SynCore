@@ -21,13 +21,11 @@ public static class SignIn
         public Validator()
         {
             RuleFor(c => c.Email)
-                .NotNull()
-                .NotEmpty()
-                .EmailAddress();
-            
+                .NotEmpty().WithMessage("E-mail inválido")
+                .EmailAddress().WithMessage("E-mail inválido");
+
             RuleFor(c => c.Password)
-                .NotNull()
-                .NotEmpty();
+                .NotEmpty().WithMessage("Senha inválida");
         }
     }
     
