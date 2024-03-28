@@ -17,6 +17,22 @@ public class AuthController : Controller
     {
         _sender = sender;
     }
+    
+    [HttpGet("cpf-exists")]
+    public async Task<IActionResult> CpfExists([FromQuery] string cpf, CancellationToken cancellationToken)
+    {
+        var res = await _sender.Send(new CpfExists.Command() { Cpf = cpf }, cancellationToken);
+
+        return Ok(res);
+    }
+
+    [HttpGet("email-exists")]
+    public async Task<IActionResult> EmailExists([FromQuery] string email, CancellationToken cancellationToken)
+    {
+        var res = await _sender.Send(new EmailExists.Command() { Email = email }, cancellationToken);
+
+        return Ok(res);
+    }
 
     [HttpPost("sign-up")]
     public async Task<IActionResult> SignUp([FromForm] SignUp.Command command, CancellationToken cancellationToken)

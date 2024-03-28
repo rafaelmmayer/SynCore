@@ -21,7 +21,7 @@ public class ExceptionMiddleware : IMiddleware
         {
             _logger.LogInformation("Status: {Status} - Mensagem: {Message}", 403, e.Message);
             
-            context.Response.StatusCode = 403;
+            context.Response.StatusCode = 422;
             await context.Response.WriteAsJsonAsync(new
             {
                 error = e.Errors
