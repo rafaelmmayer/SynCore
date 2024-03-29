@@ -17,6 +17,8 @@ builder.Services.AddMediatR(s =>
 });
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
+    var conn = builder.Configuration.GetConnectionString("Postgres");
+    Console.WriteLine(conn);
     options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres"));
 });
 builder.Services.AddControllers();
@@ -40,6 +42,8 @@ builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
 
 var app = builder.Build();
 
+app.UseFileServer();
+
 app.UseMiddleware<ExceptionMiddleware>();
 
 app.UseAuthentication();
@@ -47,6 +51,6 @@ app.UseAuthorization();
 
 app.MapControllers();
 
-app.MapGet("/", () => "Hello world");
+app.MapFallbackToFile("index.html");
 
 app.Run();
