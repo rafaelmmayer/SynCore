@@ -1,0 +1,18 @@
+﻿services:
+  app:
+    image: '460032777393.dkr.ecr.us-east-1.amazonaws.com/syncore:latest'
+    ports:
+      - '13258:80'
+    environment:
+      - 'ConnectionStrings__Postgres=User ID=postgres;Host=172.31.93.85;Port=5432;Database=postgres;Pooling=true;'
+    networks:
+      - 'syncore'
+    volumes:
+      - 'syncore-DataProtection-Keys:/root/.aspnet/DataProtection-Keys'
+    restart: unless-stopped
+
+networks:
+  syncore:
+
+volumes:
+  syncore-DataProtection-Keys:

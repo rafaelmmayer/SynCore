@@ -1,0 +1,35 @@
+@base_url=http://localhost:5003/api
+@cookie=.AspNetCore.Cookies=CfDJ8Bk1Q_cyBgRFqVjXa2GrmAKKwrWduvEtvJywllXdwne3irFc3qYPsP8sCoRQYiRfAw6GFbE5uy4lAzwT0KNAhUlUyQZEfD7tGEynf_7NI-y5gYJzBBrxbNQszPcR0ztGkLIYskguSoTRzY5Se8Nji2Mf9DX2AhzD-yEIEyWnF0w5HenFrYZbQzfBNdYU_mqTfWKuqy68kkQsPuQN0p4daIMl1DkgmuBONiIHPRIz9CjnV9DHo9Q5qmbFaWNHI5rxlN21F3ABe_y_VQglk3Nhaq3WYnyE49JbVbzmdqsI8ea-4EKd1JV7nUAGeg7_9GrnXJZDBbfHv3l32nBzLmeS17Wt7jvpfNUtE21cFkOBxctNnFKFroWkjzIwkb1YYH49gHGIhQtEI6V2ejjaLPb5SxEyegb6jhEsMcTGGVNzf-KU86WdR_M1LFrYWUtYJlpUgKuo9djfYyyNoFoJwHbomSU
+@classId=961ddbfc-8ad2-4933-b462-6ac82b5976dc
+
+### AddClass
+POST {{base_url}}/classes
+Content-Type: application/json
+Cookie: {{cookie}}
+
+{
+  "Name": "Matéria 2",
+  "Times": [
+    {
+      "DayOfWeek": 0,
+      "Hour": 19,
+      "Minute": 20
+    }
+  ]
+}
+
+### GetAllClasses
+GET {{base_url}}/classes
+Cookie: {{cookie}}
+
+### GetClassById
+GET {{base_url}}/classes/{{classId}}
+Cookie: {{cookie}}
+
+### DeactivateClass
+POST {{base_url}}/classes/{{classId}}/deactivate
+Cookie: {{cookie}}
+
+### DeleteClass
+DELETE {{base_url}}/classes/{{classId}}
+Cookie: {{cookie}}

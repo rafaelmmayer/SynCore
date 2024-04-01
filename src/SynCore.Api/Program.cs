@@ -1,9 +1,12 @@
+using System.Text.Json.Serialization;
 using FluentValidation;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using SynCore.Api.Data;
 using SynCore.Api.Middlewares;
+using SynCore.Api.Services;
+using SynCore.Api.Services.Email;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,18 +14,26 @@ builder.Host.UseSerilog((hostBuilder, loggerConfiguration) =>
 {
     loggerConfiguration.ReadFrom.Configuration(hostBuilder.Configuration);
 });
+
 builder.Services.AddMediatR(s =>
 {
     s.RegisterServicesFromAssembly(typeof(Program).Assembly);
 });
+
+var conn = builder.Configuration.GetConnectionString("Postgres");
 builder.Services.AddDbContext<AppDbContext>(options =>
 {
-    var conn = builder.Configuration.GetConnectionString("Postgres");
-    Console.WriteLine(conn);
-    options.UseNpgsql(builder.Configuration.GetConnectionString("Postgres"));
+    options.UseNpgsql(conn);
 });
-builder.Services.AddControllers();
-builder.Services.AddScoped<ExceptionMiddleware>();
+
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingNull;
+        options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+    });
+
+
 builder.Services
     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
     .AddCookie(op =>
@@ -37,8 +48,16 @@ builder.Services
         op.Cookie.SecurePolicy = CookieSecurePolicy.None;
     });
 builder.Services.AddAuthorization();
-builder.Services.AddCors();
+
 builder.Services.AddValidatorsFromAssembly(typeof(Program).Assembly);
+
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddScoped<ExceptionMiddleware>();
+
+builder.Services.AddScoped<AuthUserProvider>();
+
+builder.Services.AddTransient<IEmailService, FakeEmailService>();
 
 var app = builder.Build();
 

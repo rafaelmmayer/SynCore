@@ -5,24 +5,25 @@
 namespace SynCore.Api.Migrations
 {
     /// <inheritdoc />
-    public partial class Email_User : Migration
+    public partial class Add_WasUsed_PasswordResetToken : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Email",
-                table: "Users",
-                type: "text",
-                nullable: true);
+            migrationBuilder.AddColumn<bool>(
+                name: "WasUsed",
+                table: "PasswordResetTokens",
+                type: "boolean",
+                nullable: false,
+                defaultValue: false);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Email",
-                table: "Users");
+                name: "WasUsed",
+                table: "PasswordResetTokens");
         }
     }
 }

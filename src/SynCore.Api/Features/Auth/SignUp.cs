@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SynCore.Api.Common.Exceptions;
@@ -73,21 +74,14 @@ public static class SignUp
             {
                 throw new AppException(StatusCodes.Status409Conflict, "e-mail já cadastrado");
             }
+
+            var user = request.Adapt<User>();
+            user.Id = Guid.NewGuid();
             
-            var user = new User
-            {
-                Id = Guid.NewGuid(),
-                Name = request.Name,
-                LastName = request.LastName,
-                Email = request.Email,
-                Cpf = request.Cpf,
-                CollegeName = request.CollegeName
-            };
             var hasPassword = new Password()
             {
                 Id = Guid.NewGuid(),
                 Value = BCrypt.Net.BCrypt.HashPassword(request.Password),
-                User = user,
                 UserId = user.Id
             };
 

@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using SynCore.Api.Features.Auth;
 
-namespace SynCore.Api.Controllers;
+namespace SynCore.Api.Controllers.Auth;
 
 [ApiController]
 [Route("api/[controller]")]
@@ -25,6 +25,22 @@ public class AuthController : Controller
 
         return Ok(res);
     }
+
+    [HttpPost("email-password-reset")]
+    public async Task<IActionResult> EmailPasswordReset([FromQuery] string email, CancellationToken cancellationToken)
+    {
+        await _sender.Send(new EmailPasswordReset.Command() { Email = email }, cancellationToken);
+
+        return Ok();
+    }
+    
+    [HttpPost("password-reset")]
+    public async Task<IActionResult> PasswordReset([FromForm] PasswordReset.Command command, CancellationToken cancellationToken)
+    {
+        await _sender.Send(command, cancellationToken);
+
+        return Ok();
+    }   
 
     [HttpGet("email-exists")]
     public async Task<IActionResult> EmailExists([FromQuery] string email, CancellationToken cancellationToken)
