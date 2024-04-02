@@ -1,0 +1,39 @@
+@base_url=http://localhost:5003/api
+
+### SignUp
+POST {{base_url}}/auth/sign-up
+Content-Type: application/x-www-form-urlencoded
+
+name=Rafael
+&lastName=Mayer
+&email=rafa.mayer67@gmail.com
+&cpf=44480073833
+&collegeName=PUC
+&password=mayeeR09
+
+### SignIn
+POST {{base_url}}/auth/sign-in
+Content-Type: application/x-www-form-urlencoded
+
+email=rafa.mayer67@gmail.com
+&password=mayeeR09
+
+### Me
+GET {{base_url}}/auth/me
+Cookie: .AspNetCore.Cookies=CfDJ8Bk1Q_cyBgRFqVjXa2GrmAKKwrWduvEtvJywllXdwne3irFc3qYPsP8sCoRQYiRfAw6GFbE5uy4lAzwT0KNAhUlUyQZEfD7tGEynf_7NI-y5gYJzBBrxbNQszPcR0ztGkLIYskguSoTRzY5Se8Nji2Mf9DX2AhzD-yEIEyWnF0w5HenFrYZbQzfBNdYU_mqTfWKuqy68kkQsPuQN0p4daIMl1DkgmuBONiIHPRIz9CjnV9DHo9Q5qmbFaWNHI5rxlN21F3ABe_y_VQglk3Nhaq3WYnyE49JbVbzmdqsI8ea-4EKd1JV7nUAGeg7_9GrnXJZDBbfHv3l32nBzLmeS17Wt7jvpfNUtE21cFkOBxctNnFKFroWkjzIwkb1YYH49gHGIhQtEI6V2ejjaLPb5SxEyegb6jhEsMcTGGVNzf-KU86WdR_M1LFrYWUtYJlpUgKuo9djfYyyNoFoJwHbomSU
+
+### CpfExists
+GET {{base_url}}/auth/cpf-exists?cpf=44480073833
+
+### EmailExists
+GET {{base_url}}/auth/email-exists?email=rafa.mayer67@gmail.com
+
+### EmailPasswordReset
+POST {{base_url}}/auth/email-password-reset?email=rafa.mayer67@gmail.com
+
+### PasswordReset
+POST {{base_url}}/auth/password-reset
+Content-Type: application/x-www-form-urlencoded
+
+token=H3n7a8lJCkeruEEAzXqmyw==
+&password=rafamayeR09

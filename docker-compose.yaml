@@ -7,8 +7,15 @@ services:
       - '5433:5432'
     environment:
       POSTGRES_PASSWORD: postgres
+    networks:
+      - syncore
 
   adminer:
     image: adminer
     ports:
       - 8080:8080
+    networks:
+      - syncore
+
+networks:
+  syncore:
