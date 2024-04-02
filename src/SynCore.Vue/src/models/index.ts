@@ -3,6 +3,10 @@ interface Claim {
     value: string
 }
 
+interface ErrorResponse {
+    errorMessage: string,
+}
+
 class User {
     id: string;
     name: string;
@@ -30,4 +34,4 @@ class User {
 }
 
 export { User }
-export type { Claim }
+export type { Claim, ErrorResponse }

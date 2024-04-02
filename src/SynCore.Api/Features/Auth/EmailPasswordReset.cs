@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using System.Web;
+using FluentValidation;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SynCore.Api.Common.Exceptions;
@@ -66,7 +67,8 @@ public static class EmailPasswordReset
             await _appDbContext.PasswordResetTokens.AddAsync(passwordResetToken, cancellationToken);
             await _appDbContext.SaveChangesAsync(cancellationToken);
 
-            await _emailService.SendEmailPasswordReset(passwordResetToken.Token);
+            var urlToken = HttpUtility.UrlEncode(token);
+            await _emailService.SendEmailPasswordReset(urlToken);
         }
     }
 }

@@ -19,15 +19,14 @@ public static class PasswordReset
         public Validator()
         {
             RuleFor(c => c.Token)
-                .NotNull()
-                .NotEmpty();
+                .NotEmpty().WithMessage("link inválido");
 
             RuleFor(p => p.Password).Cascade(CascadeMode.Continue)
                 .NotEmpty().WithMessage("Não pode ser vazia.")
-                .MinimumLength(8).WithMessage("Deve conter pelo menos 8 caracteres.")
-                .Matches(@"[A-Z]+").WithMessage("Deve conter pelo menos uma letra maiúscula.")
-                .Matches(@"[a-z]+").WithMessage("Deve conter pelo menos uma letra minúscula.")
-                .Matches(@"[0-9]+").WithMessage("Deve conter pelo menos um número.");
+                .MinimumLength(8).WithMessage("Senha deve conter pelo menos 8 caracteres.")
+                .Matches(@"[A-Z]+").WithMessage("Senha deve conter pelo menos uma letra maiúscula.")
+                .Matches(@"[a-z]+").WithMessage("Senha deve conter pelo menos uma letra minúscula.")
+                .Matches(@"[0-9]+").WithMessage("Senha deve conter pelo menos um número.");
         }
     }
     

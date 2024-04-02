@@ -16,7 +16,7 @@ POST {{base_url}}/auth/sign-in
 Content-Type: application/x-www-form-urlencoded
 
 email=rafa.mayer67@gmail.com
-&password=rafamayeR09
+&password=mayeeR09
 
 ### Me
 GET {{base_url}}/auth/me
@@ -35,5 +35,5 @@ POST {{base_url}}/auth/email-password-reset?email=rafa.mayer67@gmail.com
 POST {{base_url}}/auth/password-reset
 Content-Type: application/x-www-form-urlencoded
 
-token=vLDihxhzTkKgyAkF1ghCtw==
+token=H3n7a8lJCkeruEEAzXqmyw==
 &password=rafamayeR09

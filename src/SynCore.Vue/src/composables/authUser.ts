@@ -1,7 +1,7 @@
 import {ref} from "vue";
-import axios from "axios";
-import type {Claim} from "@/models/User";
-import {User} from "@/models/User";
+import axios, { AxiosError } from "axios";
+import type {Claim, ErrorResponse} from "@/models";
+import {User} from "@/models";
 
 interface SignUpArgs {
     name: string,
@@ -22,11 +22,36 @@ const isAuthenticate = ref(false)
 
 export function useAuthUser(){
 
-    async function SignIn(args: SignInArgs){
+    function createError(err: any) {
+        if(err instanceof AxiosError) {
+            if (err.response){
+                if (err.response.data.error) {
+                    return err.response?.data.error
+                }
+                else{
+                    return [{
+                        errorMessage: 'erro não mapeado'
+                    }]
+                }
+            }
+        }
+        else {
+            return [{
+                errorMessage: 'erro não mapeado'
+            }]
+        }
+    }
+
+    async function SignIn(args: SignInArgs) : Promise<void | ErrorResponse[]> {
         const params = new URLSearchParams();
         params.append('email', args.email);
         params.append('password', args.password);
-        await axios.post('/api/auth/sign-in', params)
+
+        try {
+            await axios.post('/api/auth/sign-in', params)
+        } catch (err) {
+            return createError(err)
+        }
 
         const me = await Me()
         user.value = new User(me)
@@ -45,8 +70,13 @@ export function useAuthUser(){
         isAuthenticate.value = true
     }
 
-    async function SignOut() {
-        await axios.post('/api/auth/sign-out')
+    async function SignOut() : Promise<void | ErrorResponse[]> {
+        try {
+            await axios.post('/api/auth/sign-out')
+        } catch (err) {
+            return createError(err)
+        }
+
         user.value = null
         isAuthenticate.value = false
     }
@@ -59,7 +89,12 @@ export function useAuthUser(){
         params.append('cpf', args.cpf);
         params.append('collegeName', args.collegeName);
         params.append('password', args.password);
-        await axios.post('/api/auth/sign-up', params)
+
+        try {
+            await axios.post('/api/auth/sign-up', params)
+        } catch (err) {
+            return createError(err)
+        }
     }
 
     async function Me() {
