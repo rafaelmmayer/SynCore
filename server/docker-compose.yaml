@@ -1,10 +1,10 @@
 ﻿services:
   app:
-    image: '460032777393.dkr.ecr.us-east-1.amazonaws.com/syncore:latest'
+    image: 'mayer2/syncore:latest'
     ports:
       - '13258:80'
     environment:
-      - 'ConnectionStrings__Postgres=User ID=postgres;Host=172.31.93.85;Port=5432;Database=postgres;Pooling=true;'
+      - 'ConnectionStrings__Postgres=User ID=mayer;Password=rafamayer123;Host=10.124.0.2;Port=5432;Database=mayer;Pooling=true;'
     networks:
       - 'syncore'
     volumes:
