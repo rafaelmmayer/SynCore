@@ -46,6 +46,13 @@ builder.Services
             op.SlidingExpiration = true;
         }
         op.Cookie.SecurePolicy = CookieSecurePolicy.None;
+
+        op.Events.OnRedirectToAccessDenied =
+        op.Events.OnRedirectToLogin = c =>
+        {
+            c.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            return Task.FromResult<object>(null);
+        };
     });
 builder.Services.AddAuthorization();
 

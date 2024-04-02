@@ -16,11 +16,11 @@ POST {{base_url}}/auth/sign-in
 Content-Type: application/x-www-form-urlencoded
 
 email=rafa.mayer67@gmail.com
-&password=mayeeR09
+&password=rafamayeR09
 
 ### Me
 GET {{base_url}}/auth/me
-Cookie: .AspNetCore.Cookies=CfDJ8Bk1Q_cyBgRFqVjXa2GrmAKKwrWduvEtvJywllXdwne3irFc3qYPsP8sCoRQYiRfAw6GFbE5uy4lAzwT0KNAhUlUyQZEfD7tGEynf_7NI-y5gYJzBBrxbNQszPcR0ztGkLIYskguSoTRzY5Se8Nji2Mf9DX2AhzD-yEIEyWnF0w5HenFrYZbQzfBNdYU_mqTfWKuqy68kkQsPuQN0p4daIMl1DkgmuBONiIHPRIz9CjnV9DHo9Q5qmbFaWNHI5rxlN21F3ABe_y_VQglk3Nhaq3WYnyE49JbVbzmdqsI8ea-4EKd1JV7nUAGeg7_9GrnXJZDBbfHv3l32nBzLmeS17Wt7jvpfNUtE21cFkOBxctNnFKFroWkjzIwkb1YYH49gHGIhQtEI6V2ejjaLPb5SxEyegb6jhEsMcTGGVNzf-KU86WdR_M1LFrYWUtYJlpUgKuo9djfYyyNoFoJwHbomSU
+Cookie: .AspNetCore.Cookies=CfDJ8Kk4EOr7h9ZLmm1iroEXjqE93XCn6edR5dlk8pYY-77_p2m8ttCNp-baHKVKOz5AMawFBCD7KTvQ9Qjg95TUvO2EQw67HpZ2hzRdqWcOTYR6AX4eTR0susKcncqTEbHJIcSL0acYvy2_SMHFLT5zRbPuhR4ceRVe_rmuJZ2UCA1a9kWhLa4JERLXqzmYlNrsijSH0erSVTtAcekgGJLFAHHYVY3OKEQp0bkeW_KGFHBaascjREaRGCFKHHDOJEvfwSXunn16GDWUlhhHyR_TOO_3pPLn7poI0rGVBY29XT50XsfroZ2RcVmWijxki-lgdK4aZATWea4HMYXjrrmIrHuqvUD0zcnmnN-I7uIZVyYVAOUcJTYEBViWsJsxCAeOnelKb-29E_shhKyMO9kf5myl-mJo8-ouuQAb20BSLgbvQoeTBJwCGeAW3Hyr08LVBzV54ClYjZBTGfcEg8xQKJ8; path=/; samesite=lax
 
 ### CpfExists
 GET {{base_url}}/auth/cpf-exists?cpf=44480073833
@@ -35,5 +35,5 @@ POST {{base_url}}/auth/email-password-reset?email=rafa.mayer67@gmail.com
 POST {{base_url}}/auth/password-reset
 Content-Type: application/x-www-form-urlencoded
 
-token=H3n7a8lJCkeruEEAzXqmyw==
+token=ACiJEw0y/kiGVlfycBdAVA==
 &password=rafamayeR09

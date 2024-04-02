@@ -31,12 +31,18 @@ public static class EmailPasswordReset
         private readonly IValidator<Command> _validator;
         private readonly AppDbContext _appDbContext;
         private readonly IEmailService _emailService;
+        private readonly ILogger<Handler> _logger;
 
-        public Handler(IValidator<Command> validator, AppDbContext appDbContext, IEmailService emailService)
+        public Handler(
+            IValidator<Command> validator, 
+            AppDbContext appDbContext, 
+            IEmailService emailService,
+            ILogger<Handler> logger)
         {
             _validator = validator;
             _appDbContext = appDbContext;
             _emailService = emailService;
+            _logger = logger;
         }
 
         public async Task Handle(Command request, CancellationToken cancellationToken)
@@ -66,6 +72,8 @@ public static class EmailPasswordReset
             
             await _appDbContext.PasswordResetTokens.AddAsync(passwordResetToken, cancellationToken);
             await _appDbContext.SaveChangesAsync(cancellationToken);
+
+            _logger.LogInformation("Token: {Token}", token);
 
             var urlToken = HttpUtility.UrlEncode(token);
             await _emailService.SendEmailPasswordReset(urlToken);

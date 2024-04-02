@@ -11,7 +11,7 @@ public class FakeEmailService : IEmailService
 
     public Task SendEmailPasswordReset(string token)
     {
-        _logger.LogInformation("Token: {EmailPasswordResetToken}", token);
+        _logger.LogInformation("Token url: {EmailPasswordResetToken}", token);
         
         return Task.CompletedTask;
     }
