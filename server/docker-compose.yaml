@@ -4,15 +4,19 @@
     ports:
       - '13258:80'
     environment:
-      - 'ConnectionStrings__Postgres=User ID=mayer;Password=rafamayer123;Host=10.124.0.2;Port=5432;Database=mayer;Pooling=true;'
-    networks:
-      - 'syncore'
+      - 'ConnectionStrings__Postgres=User ID=mayer;Password=rafamayer123;Host=localhost;Port=5432;Database=mayer;Pooling=true;'
+    network_mode: "host"
     volumes:
       - 'syncore-DataProtection-Keys:/root/.aspnet/DataProtection-Keys'
     restart: unless-stopped
 
-networks:
-  syncore:
+  cloudflared-tunnel:
+    image: cloudflare/cloudflared:latest
+    network_mode: "host"
+    command: "tunnel --no-autoupdate run --token eyJhIjoiMjQ2OTUwMTk1YjBkZjM1ZGNmNGNkNDZjOGZjMjQwOTciLCJ0IjoiNDIwYzY5YTctMzE3NS00YzNjLTliZTMtODg2NGMyMThkZmM2IiwicyI6Ik9UaGhaamcyWWprdE1XRmhPUzAwTnpCbExUaGlNMkl0WmpNNE5qZ3dZMlE0TjJRNSJ9"
+
+# networks:
+#   syncore:
 
 volumes:
   syncore-DataProtection-Keys:

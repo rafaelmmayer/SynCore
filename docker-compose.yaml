@@ -14,6 +14,12 @@ services:
       - 8080:8080
     networks:
       - syncore
+  
+  cloudflared-tunnel:
+    image: cloudflare/cloudflared:latest
+    networks:
+      - syncore
+    command: "tunnel --no-autoupdate run --token eyJhIjoiMjQ2OTUwMTk1YjBkZjM1ZGNmNGNkNDZjOGZjMjQwOTciLCJ0IjoiMDVkZDQ2MzktZjMwZi00MjA3LTg5NzItNWY1NzNiYzQ2ODIxIiwicyI6Ik1UVTRNakpoWXpVdE5qTmtNeTAwWldReUxXRTNaamt0T1RaaU9XVXlaVE5rWWpoaCJ9"
 
 networks:
   syncore:
