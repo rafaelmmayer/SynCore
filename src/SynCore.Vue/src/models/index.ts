@@ -1,13 +1,31 @@
-interface Claim {
+export interface ErrorResponse {
+    errorMessage: string,
+}
+
+export interface Claim {
     type: string,
     value: string
 }
 
-interface ErrorResponse {
-    errorMessage: string,
+export interface Class {
+    name: string
+    absences: number
+    total: number
+    isActive: boolean
+    times: Time[]
+    userId: string
+    id: string
 }
 
-class User {
+export interface Time {
+    dayOfWeek: number
+    hour: number
+    minute: number
+    classId: string
+    id: string
+}
+
+export class User {
     id: string;
     name: string;
     college: string;
@@ -33,5 +51,5 @@ class User {
     }
 }
 
-export { User }
-export type { Claim, ErrorResponse }
+
+

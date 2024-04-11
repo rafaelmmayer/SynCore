@@ -1,5 +1,5 @@
 @base_url=http://localhost:5003/api
-@cookie=.AspNetCore.Cookies=CfDJ8Kk4EOr7h9ZLmm1iroEXjqHQtknfcnNiKb-yfcLjIS1B3l_S_C-YjrlsIAv88hmZLq6t3_LkuECKj7X0-m6aeTL2Km49LJNnc2TFMFyYnmKc_-PnZTRYfF8JI5odDn5z2iimqy0TW4KQ592PNd7ihPsWk0VTpmDe28PrQwY9M_Zev1N0LtmyDoHa3vuEAvweISkxAbmmBuGXMxkXAv9mWXBMTZR2VRkJemg8YGGbvkJgvkLkXMnd_0FL4x6vPUaKayZLBl-rxj1QLXnFDfaDSNPefqka7zPDaGo6fvSrA2S2vhy6dQbW2iufGFRDblPxWEgF0wGSEqAhuE6SqDymj1RIoSrt2Ros9G_DPWbR7ihXoksah2R_qEoLu1CLktWry58t17ZK_s7ic4WIW52GO0-nCxkQG47aezeuERUZZ6KTi-EDVBgVpdngBpsTv54vcvALUcwAV8tCt4S0vHCu15Y
+@cookie=.AspNetCore.Cookies=CfDJ8Kk4EOr7h9ZLmm1iroEXjqHXa92G8pXjd_SLuyWTe8WIHYprZxmIXOUpnplREd88YsEaZZZLfZ5NSzb03gEKOL0r4sSLsJ3ryK-rdWKLHcUzdipevslcV347K0YX_UCo0rPV35tA65HNEcLFX4lesNt8_yu0lu_jqaS-7LKgiXwTTddMV8xSZ5OEjroRvNZwr588gN3B4txOqd98v1kRtEs40iXy4V0ZsGrdAaaw_4UbQnD5jI24K-gf12GnN8abnv90kBZ1EusK6B4kPt3A8cY32qqXe4MGgI_Z1cQoHw1S0TbaGqxUqzNEn4xg5mSQElkOgJRThxRLilr92Ed-F-uj8BmUHNpZOPw_WED0eJFY8Qi4jj_Et7HazjwEhhwHb3bKREeKotFTHWi_LiAwEbQc5E_BUF2cwu-eIIAqgjAr4Xh1cVQoSASo1KTOe4mG8ZRa6OlJ3xwvVPOKGXRU5uI
 @classId=cecde5d7-d8fd-4cb9-9434-2d6e5426ccf3
 
 ### AddClass
@@ -8,7 +8,7 @@ Content-Type: application/json
 Cookie: {{cookie}}
 
 {
-  "Name": "Matéria 2",
+  "Name": "Matéria 1",
   "Times": [
     {
       "DayOfWeek": 0,
