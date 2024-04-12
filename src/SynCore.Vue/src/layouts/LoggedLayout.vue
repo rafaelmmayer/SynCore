@@ -27,7 +27,7 @@ onMounted(async () => {
 <template>
   <div class="h-screen d-flex flex-column" v-if="authUser.isAuthenticate">
     <div
-        class="d-flex justify-lg-space-between align-center pa-6"
+        class="d-flex justify-space-between align-center pa-6"
         style="height: 50px; border-bottom: 1px solid #E4E5E7;"
     >
       <h1 class="text-sm-h5">Syncore</h1>

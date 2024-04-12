@@ -13,16 +13,16 @@ export interface Class {
     total: number
     isActive: boolean
     times: Time[]
-    userId: string
-    id: string
+    userId?: string
+    id?: string
 }
 
 export interface Time {
     dayOfWeek: number
     hour: number
     minute: number
-    classId: string
-    id: string
+    classId?: string
+    id?: string
 }
 
 export class User {
