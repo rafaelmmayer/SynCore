@@ -2,6 +2,7 @@
 import {onMounted, ref} from "vue";
 import {useAuthUser} from "@/composables/authUser";
 import {useRouter} from "vue-router";
+import NavbarButton from "@/components/Navbar/NavbarButton.vue";
 
 const authUser = useAuthUser()
 const router = useRouter()
@@ -24,15 +25,38 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div v-if="authUser.isAuthenticate">
-    <nav style="display: flex; gap: 8px">
-      <RouterLink to="/">Home</RouterLink>
-      <RouterLink to="/class-schedule">Presença</RouterLink>
-      <RouterLink to="/chat">Chat</RouterLink>
-      <RouterLink to="/auth/sign-in">Sign In</RouterLink>
-      <button @click.prevent="handleSignOut">Sign Out</button>
-    </nav>
-    <slot/>
+  <div class="h-screen d-flex flex-column" v-if="authUser.isAuthenticate">
+    <div
+        class="d-flex justify-space-between align-center pa-6"
+        style="height: 50px; border-bottom: 1px solid #E4E5E7;"
+    >
+      <h1 class="text-sm-h5">Syncore</h1>
+      <v-avatar color="surface-variant" size="small">RM</v-avatar>
+    </div>
+    <div class="d-flex flex-grow-1">
+      <nav
+          class="d-flex flex-column ga-2 py-2"
+          style="width: 160px; border-right: 1px solid #E4E5E7;"
+      >
+        <NavbarButton to="/" icon="mdi-home" text="Home"/>
+        <NavbarButton to="/class-schedule" icon="mdi-format-list-bulleted-square" text="Presença"/>
+        <NavbarButton to="/chat" icon="mdi-message" text="Chat"/>
+        <div class="flex-grow-1 d-flex align-end justify-center">
+          <button class="w-100 d-flex justify-center ga-2" @click.prevent="handleSignOut">
+            <v-icon
+              color="#BCBCBC"
+              icon="mdi-logout"/>
+            Sair
+          </button>
+        </div>
+      </nav>
+      <div
+          class="w-100"
+          style="background-color: #f4f5f7"
+      >
+        <slot/>
+      </div>
+    </div>
   </div>
 </template>
 

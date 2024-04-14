@@ -1,0 +1,4 @@
+﻿@base_url=http://localhost:5003/api
+
+### GetAllPosts
+GET {{base_url}}/posts
