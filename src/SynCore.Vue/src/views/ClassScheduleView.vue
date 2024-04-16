@@ -4,6 +4,7 @@ import {onMounted, ref} from "vue";
 import axios from "axios";
 import type {Class, ErrorResponse} from "@/models";
 import AddClassDialog from "@/components/Dialogs/AddClassDialog.vue";
+import ScheduleTab from "@/components/Tabs/ScheduleTab.vue";
 
 const tab = ref()
 const classes = ref<Class[]>([])
@@ -15,7 +16,6 @@ function handleCreateClass(c: Class) {
 onMounted(() => {
   axios.get<Class[]>('/api/classes', { withCredentials: true })
     .then(res => {
-      console.log(res.data)
       classes.value = res.data
     })
     .catch(err => {
@@ -37,12 +37,11 @@ onMounted(() => {
     >
       <v-tab value="one">Cadastro</v-tab>
       <v-tab value="two">Grade</v-tab>
-      <v-tab value="three">Visão geral</v-tab>
     </v-tabs>
 
-    <v-card-text class="flex-grow-1">
-      <v-window v-model="tab">
-        <v-window-item value="one">
+    <div class="flex-grow-1">
+      <v-window v-model="tab" class="h-100 d-flex flex-column">
+        <v-window-item value="one" class="pa-4">
           <div class="mb-4 d-flex ga-4">
             <div class="text-md-h5">Disciplinas</div>
             <AddClassDialog @create-class="handleCreateClass"/>
@@ -78,17 +77,11 @@ onMounted(() => {
           </v-table>
         </v-window-item>
 
-        <v-window-item value="two">
-          Two
-        </v-window-item>
-
-        <v-window-item value="three">
-          <div v-for="c in classes" :key="c.id">
-            {{ c.name }}
-          </div>
+        <v-window-item value="two" class="flex-grow-1">
+          <ScheduleTab/>
         </v-window-item>
       </v-window>
-    </v-card-text>
+    </div>
   </div>
 
 

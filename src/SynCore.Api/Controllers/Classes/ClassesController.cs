@@ -49,6 +49,14 @@ public class ClassesController : Controller
 
         return Ok(res);
     }
+    
+    [HttpGet("schedule")]
+    public async Task<IActionResult> GetClassesSchedule(CancellationToken cancellationToken)
+    {
+        var res = await _sender.Send(new GetClassesSchedule.Command(), cancellationToken);
+
+        return Ok(res);
+    }
 
     [HttpPost("{id:guid}/deactivate")]
     public async Task<IActionResult> DeactivateClass([FromRoute] Guid id, CancellationToken cancellationToken)

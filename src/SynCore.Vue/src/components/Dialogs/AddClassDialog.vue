@@ -1,19 +1,17 @@
 <script setup lang="ts">
 
-import type {Class, Time} from "@/models";
+import type {Class, DayOfWeek, Time} from "@/models";
 import {ref} from "vue";
 import type {VTextField} from "vuetify/components";
-
-interface DayOfWeek {
-  day: number;
-  str: string;
-}
+import axios from "axios";
 
 const emit = defineEmits<{
   (e: 'createClass', c: Class): void
 }>()
 
 const name = ref<string>()
+const absences = ref<number>()
+const total = ref<number>()
 const hour = ref<number>()
 const minute = ref<number>()
 const times = ref<Time[]>([])
@@ -22,6 +20,8 @@ const isTimeFormValid = ref<boolean>()
 const isEmptyTimesMessageVisible = ref<boolean>()
 
 const classNameInput = ref<VTextField>()
+const classTotalInput = ref<VTextField>()
+const classAbsencesInput = ref<VTextField>()
 
 const itemsDayOfWeek: DayOfWeek[] = [
   {day: 0, str: 'Domingo',},
@@ -39,13 +39,15 @@ function getDayOfWeekStr(day: number) {
 
 const inputsRules = {
   required: (value: string) => !!value || 'Campo obrigatório',
-  min: (value: number) => value > 0 || 'Deve ser maior a 0',
-  maxHour: (value: number) => value <= 24 || 'Deve ser menor ou igual a 24',
-  maxMinutes: (value: number) => value <= 60 || 'Deve ser menor ou igual a 60',
+  min: (value: number) => value >= 0 || 'Deve ser maior ou igual a 0',
+  maxHour: (value: number) => value < 24 || 'Deve ser menor a 24',
+  maxMinutes: (value: number) => value < 60 || 'Deve ser menor a 60',
 }
 
-function handleCreateClass() {
-  if (!classNameInput.value?.isValid) {
+async function handleCreateClass() {
+  if (!classNameInput.value?.isValid
+  || classTotalInput.value?.isValid
+  || classAbsencesInput.value?.isValid) {
     return
   }
 
@@ -57,9 +59,17 @@ function handleCreateClass() {
   const c: Class = {
     name: name.value!,
     isActive: true,
-    total: 0,
-    absences: 0,
+    total: total.value!,
+    absences: absences.value!,
     times: times.value,
+  }
+
+  try{
+    const res = await axios.post('/api/classes', c)
+    console.log(res)
+  } catch (e) {
+    console.error(e)
+    return
   }
 
   emit('createClass', c)
@@ -95,6 +105,8 @@ function clearTimeInputs() {
 function clearData() {
   setTimeout(() => {
     name.value = undefined
+    total.value = undefined
+    absences.value = undefined
     times.value = []
     clearTimeInputs()
   }, 500)
@@ -134,6 +146,28 @@ function clearData() {
                 :rules="[inputsRules.required]"
                 v-model="name"
             />
+            <div class="d-flex ga-4 mt-4">
+              <v-text-field
+                  ref="classNameInput"
+                  density="compact"
+                  variant="outlined"
+                  label="Aulas"
+                  type="number"
+                  hide-spin-buttons
+                  :rules="[inputsRules.required, inputsRules.min]"
+                  v-model="total"
+              />
+              <v-text-field
+                  ref="classNameInput"
+                  density="compact"
+                  variant="outlined"
+                  label="Frequência"
+                  type="number"
+                  hide-spin-buttons
+                  :rules="[inputsRules.required, inputsRules.min]"
+                  v-model="absences"
+              />
+            </div>
             <div class="mt-4">
               <v-form v-model="isTimeFormValid" @submit.prevent="handleAddTime" class="d-flex flex-column ga-3">
                 <div class="d-flex align-center ga-3">

@@ -3,6 +3,8 @@
 public class AddClassRequest
 {
     public string Name { get; set; }
+    public int Absences { get; set; }
+    public int Total { get; set; }
     public Time[] Times { get; set; }
 
     public class Time

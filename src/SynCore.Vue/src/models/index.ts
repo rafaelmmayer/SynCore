@@ -25,6 +25,11 @@ export interface Time {
     id?: string
 }
 
+export interface DayOfWeek {
+    day: number;
+    str: string;
+}
+
 export class User {
     id: string;
     name: string;

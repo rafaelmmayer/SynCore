@@ -13,6 +13,9 @@ public static class AddClass
     public class Command : IRequest<Class>
     {
         public string Name { get; set; }
+        public int Absences { get; set; }
+        public int Total { get; set; }
+        
         public Guid UserId { get; set; }
         public Time[] Times { get; set; }
 
@@ -30,6 +33,12 @@ public static class AddClass
         {
             RuleFor(c => c.Name)
                 .NotEmpty().WithMessage("Nome não pode ser vazio");
+
+            RuleFor(c => c.Total)
+                .GreaterThanOrEqualTo(0).WithMessage("Total de aulas deve ser maior ou igual a 0");
+            
+            RuleFor(c => c.Absences)
+                .GreaterThanOrEqualTo(0).WithMessage("Total de faltas deve ser maior ou igual a 0");
             
             RuleFor(c => c.Times)
                 .NotNull().WithMessage("Matéria precisa de horário(s)")
