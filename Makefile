@@ -21,7 +21,7 @@ docker-compose-down:
 	docker compose down
 	
 docker-build:
-	docker build -t mayer2/syncore:latest .
+	docker build --no-cache -t mayer2/syncore:latest .
 
 docker-push: docker-build
 	docker push mayer2/syncore:latest
