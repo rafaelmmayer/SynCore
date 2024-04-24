@@ -79,4 +79,10 @@ app.MapControllers();
 
 app.MapFallbackToFile("index.html");
 
+using (var serviceScope = app.Services.GetRequiredService<IServiceScopeFactory>().CreateScope())
+{
+    var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
+    context.Database.Migrate();
+}
+
 app.Run();

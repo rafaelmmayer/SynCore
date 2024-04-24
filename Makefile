@@ -4,9 +4,15 @@ watch-api:
 run-api:
 	dotnet watch run --project src/SynCore.Api
 
-build:
+build-frontend:
 	rm -rf dist/
-	dotnet publish -c Release -o dist/ src/SynCore.Api
+	npm --prefix src/SynCore.Vue run build
+
+build: build-frontend
+	dotnet publish -c Release -o dist/ --self-contained false src/SynCore.Api
+	
+build-linux: build-frontend
+	dotnet publish -c Release -o dist/ --self-contained false --runtime linux-x64 src/SynCore.Api
 
 docker-compose-up:
 	docker compose up -d
@@ -15,10 +21,13 @@ docker-compose-down:
 	docker compose down
 	
 docker-build:
-	docker build -t 460032777393.dkr.ecr.us-east-1.amazonaws.com/syncore:latest .
+	docker build -t mayer2/syncore:latest .
 
 docker-push: docker-build
-	docker push 460032777393.dkr.ecr.us-east-1.amazonaws.com/syncore:latest
+	docker push mayer2/syncore:latest
 
-server-deploy: docker-push
-	ssh ubuntu@23.20.253.166 "cd syncore ; ./deploy.sh"
+server-deploy-docker: docker-push
+	ssh mayer@143.198.51.145 "cd syncore ; ./deploy.sh"
+
+server-deploy: build-linux
+	scp -r dist mayer@143.198.51.145:/home/mayer/syncore

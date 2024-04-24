@@ -4,15 +4,28 @@
     ports:
       - '13258:80'
     environment:
-      - 'ConnectionStrings__Postgres=User ID=mayer;Password=rafamayer123;Host=localhost;Port=5432;Database=mayer;Pooling=true;'
+      - 'ConnectionStrings__Postgres=User ID=mayer;Password=rafamayer123;Host=postgres;Port=5432;Database=mayer;Pooling=true;'
     networks:
       - syncore
     volumes:
       - 'syncore-DataProtection-Keys:/root/.aspnet/DataProtection-Keys'
-    restart: unless-stopped
+    restart: always
+  
+  postgres:
+    image: postgres:14.11
+    environment:
+      POSTGRES_USER: mayer
+      POSTGRES_PASSWORD: rafamayer123
+      POSTGRES_DB: mayer
+    networks:
+      - syncore
+    volumes:
+      - 'postgres-data:/var/lib/postgresql/data'
+    restart: always
 
 networks:
   syncore:
 
 volumes:
   syncore-DataProtection-Keys:
+  postgres-data:
