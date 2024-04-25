@@ -19,7 +19,7 @@ function handleSignOut() {
       <span class="select-none">Syncore</span>
     </div>
     <div class="flex-grow-1 flex">
-      <nav style="width: 145px" class="py-2 flex flex-column">
+      <nav style="width: 150px" class="py-2 flex flex-column border-right-1 border-gray-200">
         <ul class="flex-grow-1">
           <li>
             <NuxtLink to="/">

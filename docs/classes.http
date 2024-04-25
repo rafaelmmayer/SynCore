@@ -1,6 +1,6 @@
 @base_url=http://localhost:5003/api
-@cookie=.AspNetCore.Cookies=CfDJ8Bk1Q_cyBgRFqVjXa2GrmALDEPIFnJ2pZ1Mk_0kIKpQ02hnKhHFk3DN99MGKucaBQRXB0qYKt1zMXqYuFgT4RwtnEYLTe37Jr9VxEqL21fLG5UajGbDo0WIQf646fD2BaTTjXiPZoHydH39uPTyPhdv_9N5BTVJj0cZN2lgK8-rS4p1yUISefM7_FMqk6APPiy1jmj0WkbvOVUT2OWkhrY6WI1cNSVN9V45EOW6p-DFYvaUScFlE69BZWE8rJSTxi5_yWtz2hbUhQpUNztolChdppN-thRT-IPqOlixKNbn00wS2fOKGfNji8keSYGm9PuyrJyMeU-AKTGg5GH-4t8ipwUhytidEVKFlympdcDQ9qtMPDLYTJAmidpt27hvZGRpihgt8xGCuYIXViOgHS2HBJzwHXFlUZjOwDoA4Mr6h_pSwyDfFvVrCkGhXD44xgZ7BP6cXaXgHxHmnJeSr3ik; path=/; samesite=lax; httponly
-@classId=cecde5d7-d8fd-4cb9-9434-2d6e5426ccf3
+@cookie=.AspNetCore.Cookies=CfDJ8Kk4EOr7h9ZLmm1iroEXjqGf_N3fpEYnwNMNIO7307BYqRL7dtRKo5sAftlDDrO3F0QcO-GyoJpzAkL1JGf1qLP5nt-chyc6dIU4o-CcwZxM9FAQ8hJqoZlPr7_LKUaSPR1dT0C7n-TfhRiLooqR0ZcF5iZsZq9oBrzTLlr1EW56C4NyFXrB-e6okp3my4RgnsSX_RjhNB2exuqI_XM3B35MEK6m8mR3EdVcQtmMm7jMrrQOrFt5a4DZh4uuwgCIQUEBQAJUlkE4hxROKOzmF0bzWTxphQrh2aZIQzhFw4CCgwE2EK5XVSphb0cyKwXoVJCHFxWGhjjjaXW393757ayP1Lhngn_qTl44RPbRQe07rt8L3W0PRdhXHLO9TMaFeQw6FswHEr10_xOp10OXSQwhrFi0PeLC22WMgKcZVxdPnjCnmr6MaZiN3QZSzALY-2rLVrJtJyjahbG2M89sU4g
+@classId=1619eccc-f468-4e69-82b8-d27b88fbdc1c
 
 ### AddClass
 POST {{base_url}}/classes
@@ -8,7 +8,7 @@ Content-Type: application/json
 Cookie: {{cookie}}
 
 {
-  "Name": "Matéria 2",
+  "Name": "Matéria 7",
   "Times": [
     {
       "DayOfWeek": 0,
