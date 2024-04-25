@@ -96,7 +96,10 @@ public class AuthController : Controller
     {
         var claims = HttpContext.User.Claims
             .Select(c => new { c.Type, c.Value })
-            .ToArray();
+            .ToList();
+        
+        // claims.Add(new { Type = "id", Value = Guid.NewGuid().ToString() });
+        // claims.Add(new { Type = "name", Value = "Rafael Mayer" });
 
         return Ok(claims);
     }
