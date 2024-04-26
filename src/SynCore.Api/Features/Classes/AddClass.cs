@@ -22,8 +22,12 @@ public static class AddClass
         public class Time
         {
             public DayOfWeek DayOfWeek { get; set; }
-            public int Hour { get; set; }
-            public int Minute { get; set; }
+            
+            public string StartHour { get; set; }
+            public string StartMinute { get; set; }
+    
+            public string EndHour { get; set; }
+            public string EndMinute { get; set; }
         }
     }
 
@@ -52,14 +56,18 @@ public static class AddClass
         {
             RuleFor(t => t.DayOfWeek)
                 .NotNull().WithMessage("Dia da semana não pode ser vazio");
-            
-            RuleFor(t => t.Hour)
-                .GreaterThan(0).WithMessage("Hora não pode ser menor que 0")
-                .LessThanOrEqualTo(24).WithMessage("Hora inválida");
-            
-            RuleFor(t => t.Minute)
-                .GreaterThan(0).WithMessage("Minuto não pode ser menor que 0")
-                .LessThanOrEqualTo(60).WithMessage("Minuto inválido");
+
+            RuleFor(t => t.StartHour)
+                .NotEmpty();
+
+            RuleFor(t => t.StartMinute)
+                .NotEmpty();
+
+            RuleFor(t => t.EndHour)
+                .NotEmpty();
+
+            RuleFor(t => t.EndMinute)
+                .NotEmpty();
         }
     }
     

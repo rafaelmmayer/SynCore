@@ -20,9 +20,14 @@ public static class GetClassesSchedule
                 => ((Total == 0 ? 0 : Absences / (double)Total) * 100).ToString("F1");
             
             public DayOfWeek DayOfWeek { get; set; }
-            public int Hour { get; set; }
-            public int Minute { get; set; }
-            public string Time => $"{Hour}h{Minute}";
+            
+            public string StartHour { get; set; }
+            public string StartMinute { get; set; }
+            public string StartTime => $"{StartHour}h{StartMinute}";
+    
+            public string EndHour { get; set; }
+            public string EndMinute { get; set; }
+            public string EndTime => $"{EndHour}h{EndMinute}";
         }
     }
 
@@ -59,16 +64,18 @@ public static class GetClassesSchedule
                         Absences = c.Absences,
                         Total = c.Total,
                         DayOfWeek = t.DayOfWeek,
-                        Hour = t.Hour,
-                        Minute = t.Minute
+                        StartHour = t.StartHour,
+                        StartMinute = t.StartMinute,
+                        EndHour = t.EndHour,
+                        EndMinute = t.EndMinute
                     });
                 }
             }
             
             return res
                 .OrderBy(r => r.DayOfWeek)
-                .ThenBy(r => r.Hour)
-                .ThenBy(r => r.Minute)
+                .ThenBy(r => r.StartHour)
+                .ThenBy(r => r.StartMinute)
                 .GroupBy(r => r.DayOfWeek)
                 .Select(r => new Response()
                 {

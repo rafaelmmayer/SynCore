@@ -45,7 +45,21 @@ export interface Time {
     id?: string
 }
 
-export interface DayOfWeek {
-    day: number;
-    str: string;
+export interface DayOfWeekSchedule {
+    dayOfWeek: number
+    classes: ClassSchedule[]
+}
+
+export interface ClassSchedule {
+    name: string
+    absences: number
+    total: number
+    freq: string
+    dayOfWeek: number
+    startHour: string
+    startMinute: string
+    startTime: string
+    endHour: string
+    endMinute: string
+    endTime: string
 }
