@@ -1,5 +1,7 @@
 <script setup lang="ts">
 import type {ClassSchedule} from "~/types";
+import {daysOfWeek} from "~/lib";
+import {useClassesStore} from "~/pinia/classesStore";
 
 interface WeekDay {
   label: string,
@@ -8,47 +10,22 @@ interface WeekDay {
   classes?: ClassSchedule[]
 }
 
-const { getClassesSchedule } = useApiClient()
+const classesStore = useClassesStore()
 
 const selectedWeekDay = ref<WeekDay>()
+const weekDays = ref<WeekDay[]>(
+    daysOfWeek.map(d => {
+      return {
+        label: d.text,
+        value: d.value,
+        isActive: false,
+      }
+    })
+)
 
-const weekDays = ref<WeekDay[]>([
-  {
-    label: 'Domingo',
-    value: 0,
-    isActive: false,
-  },
-  {
-    label: 'Segunda',
-    value: 1,
-    isActive: false,
-  },
-  {
-    label: 'Terça',
-    value: 2,
-    isActive: false,
-  },
-  {
-    label: 'Quarta',
-    value: 3,
-    isActive: false,
-  },
-  {
-    label: 'Quinta',
-    value: 4,
-    isActive: false,
-  },
-  {
-    label: 'Sexta',
-    value: 5,
-    isActive: false,
-  },
-  {
-    label: 'Sábado',
-    value: 6,
-    isActive: false,
-  }
-])
+classesStore.$subscribe(() => {
+  loadWeekDays()
+})
 
 function handleClickWeekDayButton(value: number) {
   weekDays.value
@@ -64,17 +41,21 @@ function handleClickWeekDayButton(value: number) {
   }
 }
 
-onMounted(async () => {
-  try {
-    const res = await getClassesSchedule()
-
+function loadWeekDays() {
     weekDays.value.forEach(d => {
-      const resWeekDay = res.data.find(r => r.dayOfWeek === d.value)
+      const resWeekDay = classesStore.classesSchedule.find(r => r.dayOfWeek === d.value)
 
       if (resWeekDay) {
         d.classes = resWeekDay.classes
       }
     })
+}
+
+onMounted(async () => {
+  try {
+    await classesStore.loadClassesSchedule()
+
+    loadWeekDays()
 
     const dayOfWeekNow = new Date().getDay()
     selectedWeekDay.value = weekDays.value.find(d => d.value === dayOfWeekNow)

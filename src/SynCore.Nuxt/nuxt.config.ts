@@ -11,7 +11,7 @@ export default defineNuxtConfig({
       }
     }
   },
-  modules: ['nuxt-primevue'],
+  modules: ['nuxt-primevue', '@pinia/nuxt'],
   primevue: {
     cssLayerOrder: 'reset,primevue'
   },

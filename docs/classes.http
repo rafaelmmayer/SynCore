@@ -1,5 +1,5 @@
 @base_url=http://localhost:5003/api
-@cookie=.AspNetCore.Cookies=CfDJ8Kk4EOr7h9ZLmm1iroEXjqGf_N3fpEYnwNMNIO7307BYqRL7dtRKo5sAftlDDrO3F0QcO-GyoJpzAkL1JGf1qLP5nt-chyc6dIU4o-CcwZxM9FAQ8hJqoZlPr7_LKUaSPR1dT0C7n-TfhRiLooqR0ZcF5iZsZq9oBrzTLlr1EW56C4NyFXrB-e6okp3my4RgnsSX_RjhNB2exuqI_XM3B35MEK6m8mR3EdVcQtmMm7jMrrQOrFt5a4DZh4uuwgCIQUEBQAJUlkE4hxROKOzmF0bzWTxphQrh2aZIQzhFw4CCgwE2EK5XVSphb0cyKwXoVJCHFxWGhjjjaXW393757ayP1Lhngn_qTl44RPbRQe07rt8L3W0PRdhXHLO9TMaFeQw6FswHEr10_xOp10OXSQwhrFi0PeLC22WMgKcZVxdPnjCnmr6MaZiN3QZSzALY-2rLVrJtJyjahbG2M89sU4g
+@cookie=.AspNetCore.Cookies=CfDJ8Bk1Q_cyBgRFqVjXa2GrmAKWZGiYasK6WWbks2xiBnJ4srbiHFxRPKXwQm1oWoq26vSeHduMwscKVI6RrIba9qjY4whIx0-hgJtNy6GJ0Oj7H88RmRGeeOOZ7RtOEy3h-djOYwf27u9eV8MZjRhrhcV21o8iluQbtz0DMhaBA9exWW5kZdV5LwT7HSVUhW1LgpdOVTcYiVbdhxa_GaNFn3pbc2iOMwTGIs0BVYFZuueodjv_GFYC2EJ0hUgkJFpP6zsPl-6JiwCz7yptLg7mw3JEuu7HE3jL222KPKceuBrqjDG1qx_UMi0mB9nYWB-ZBTTRiuxXJfDNUIGdIARgXBa9OO-OySyoapZr1QPM3pj4AL-IE2EHGCCmEoN2fHZRHzC6CLBouyGGNeVC_JZ5dlUwouNRSrbVKiKrThk6LjNyrxoYvpRod6R0AaI1oHRR-JUjSIehogCNLCB8iP5WQbM
 @classId=1619eccc-f468-4e69-82b8-d27b88fbdc1c
 
 ### AddClass
@@ -8,12 +8,14 @@ Content-Type: application/json
 Cookie: {{cookie}}
 
 {
-  "Name": "Matéria 7",
+  "Name": "Matéria 12",
   "Times": [
     {
       "DayOfWeek": 0,
-      "Hour": 19,
-      "Minute": 20
+      "StartHour": "21",
+      "StartMinute": "05",
+      "EndHour": "22",
+      "EndMinute": "35"
     }
   ]
 }

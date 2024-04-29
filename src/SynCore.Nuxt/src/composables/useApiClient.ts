@@ -10,8 +10,13 @@ export function useApiClient() {
         return await axios.get<DayOfWeekSchedule[]>('/api/classes/schedule')
     }
 
+    async function addClass(c: Class) {
+        return await axios.post('/api/classes', c)
+    }
+
     return {
         getAllClasses,
-        getClassesSchedule
+        getClassesSchedule,
+        addClass
     }
 }

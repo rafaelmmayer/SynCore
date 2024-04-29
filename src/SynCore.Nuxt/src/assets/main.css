@@ -44,3 +44,22 @@
     }
 }
 
+.custom-tabview-panels {
+    flex-grow: 1;
+    height: 1px;
+    overflow: auto;
+}
+
+.custom-tabview-panel {
+    height: 100%;
+}
+
+.custom-card-body {
+    padding: 16px;
+}
+.custom-small-button {
+    padding: 8px;
+    height: 25px;
+    width: 25px;
+}
+

@@ -2,6 +2,7 @@
 
 import ClassesRegistrationTab from "~/components/TabsPanels/ClassesRegistrationTab.vue";
 import ClassScheduleTab from "~/components/TabsPanels/ClassScheduleTab.vue";
+
 </script>
 
 <template>
@@ -19,13 +20,5 @@ import ClassScheduleTab from "~/components/TabsPanels/ClassScheduleTab.vue";
 </template>
 
 <style>
-.custom-tabview-panels {
-  flex-grow: 1;
-  height: 1px;
-  overflow: auto;
-}
 
-.custom-tabview-panel {
-  height: 100%;
-}
 </style>

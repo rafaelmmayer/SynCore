@@ -32,15 +32,17 @@ export interface Class {
     absences: number
     total: number
     isActive: boolean
-    times: Time[]
+    times: ClassTime[]
     userId?: string
     id?: string
 }
 
-export interface Time {
+export interface ClassTime {
     dayOfWeek: number
-    hour: number
-    minute: number
+    startHour: string
+    startMinute: string
+    endHour: string
+    endMinute: string
     classId?: string
     id?: string
 }
