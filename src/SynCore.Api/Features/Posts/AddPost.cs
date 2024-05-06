@@ -2,7 +2,6 @@
 using Mapster;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using SynCore.Api.Common.Exceptions;
 using SynCore.Api.Data;
 using SynCore.Core.Entities;
 
@@ -10,26 +9,39 @@ namespace SynCore.Api.Features.Posts
 {
     public class AddPost
     {
-        public class Command : IRequest<Post>
+        public class Command : IRequest<Response>
         {
-            public string Title { get; set; }
             public string Content { get; set; }
             public Guid UserId { get; set; }
+        }
+        
+        public class Response
+        {
+            public Guid Id { get; set; }
+            public string Content { get; set; }
+        
+            public int NLikes { get; set; }
+            public int NComments { get; set; }
+        
+            public User User { get; set; }
+        }
+    
+        public class User
+        {
+            public Guid Id { get; set; }
+            public string Name { get; set; }
         }
 
         public class Validator : AbstractValidator<Command>
         {
             public Validator()
             {
-                RuleFor(c => c.Title)
-                    .NotEmpty().WithMessage("Nome não pode ser vazio");
-
                 RuleFor(c => c.Content)
                     .NotEmpty().WithMessage("Conteúdo não pode ser vazio");
             }
         }
 
-        public class Handler : IRequestHandler<Command, Post>
+        public class Handler : IRequestHandler<Command, Response>
         {
             private readonly IValidator<Command> _validator;
             private readonly AppDbContext _appDbContext;
@@ -42,18 +54,9 @@ namespace SynCore.Api.Features.Posts
                 _appDbContext = appDbContext;
             }
 
-            public async Task<Post> Handle(Command request, CancellationToken cancellationToken)
+            public async Task<Response> Handle(Command request, CancellationToken cancellationToken)
             {
                 await _validator.ValidateAndThrowAsync(request, cancellationToken);
-
-                var existPost = await _appDbContext.Posts
-                    .AsNoTracking()
-                    .AnyAsync(c => c.Title == request.Title, cancellationToken);
-
-                if (existPost)
-                {
-                    throw new AppException(StatusCodes.Status409Conflict, "Post já cadastrado");
-                }
 
                 var newPost = request.Adapt<Post>();
                 newPost.Id = Guid.NewGuid();
@@ -61,7 +64,26 @@ namespace SynCore.Api.Features.Posts
                 await _appDbContext.Posts.AddAsync(newPost, cancellationToken);
                 await _appDbContext.SaveChangesAsync(cancellationToken);
 
-                return newPost;
+                var user = await _appDbContext.Users
+                    .Select(u => new { u.Id, u.Name, u.LastName })
+                    .FirstAsync(
+                        u => u.Id == request.UserId, 
+                        cancellationToken);
+
+                var res = new Response()
+                {
+                    Id = newPost.Id,
+                    Content = newPost.Content,
+                    NComments = 0,
+                    NLikes = 0,
+                    User = new User()
+                    {
+                        Id = user.Id,
+                        Name = $"{user.Name} {user.LastName}"
+                    }
+                };
+
+                return res;
             }
         }
 

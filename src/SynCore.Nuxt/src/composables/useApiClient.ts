@@ -14,9 +14,20 @@ export function useApiClient() {
         return await axios.post('/api/classes', c)
     }
 
+    async function getAllPosts() {
+        return await axios.get('/api/posts')
+    }
+
+    async function addPost(p: { content: string }) {
+        return await axios.post('/api/posts', p)
+    }
+
     return {
         getAllClasses,
         getClassesSchedule,
-        addClass
+        addClass,
+
+        getAllPosts,
+        addPost
     }
 }

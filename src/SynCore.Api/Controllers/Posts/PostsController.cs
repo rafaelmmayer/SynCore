@@ -4,20 +4,22 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SynCore.Api.Controllers.Posts.Requests;
 using SynCore.Api.Features.Posts;
+using SynCore.Api.Services;
 
 namespace SynCore.Api.Controllers.Posts;
 
 [ApiController]
 [Route("api/[controller]")]
-// [Authorize]
-[AllowAnonymous]
+[Authorize]
 public class PostsController : Controller
 {
     private readonly ISender _sender;
+    private readonly AuthUser _authUser;
 
-    public PostsController(ISender sender)
+    public PostsController(ISender sender, AuthUserProvider authUser)
     {
         _sender = sender;
+        _authUser = authUser.GetAuthUser();
     }
 
     [HttpGet] // GetAllPosts
@@ -32,6 +34,8 @@ public class PostsController : Controller
     public async Task<IActionResult> AddPost([FromBody] AddPostRequest request, CancellationToken cancellationToken)
     {
         var command = request.Adapt<AddPost.Command>();
+
+        command.UserId = _authUser.Id;
 
         var res = await _sender.Send(command, cancellationToken);
 
