@@ -14,11 +14,11 @@ function handleSignOut() {
 
 <template>
   <div class="flex flex-column h-screen">
-    <div style="height: 50px" class="flex justify-content-between align-items-center px-5 border-bottom-1 border-gray-200">
+    <div style="min-height: 50px" class="flex justify-content-between align-items-center px-5 border-bottom-1 border-gray-200">
       <span class="select-none">Syncore</span>
       <span class="select-none">Syncore</span>
     </div>
-    <div class="flex-grow-1 flex">
+    <div class="flex-grow-1 flex overflow-hidden">
       <nav style="width: 150px" class="py-2 flex flex-column border-right-1 border-gray-200">
         <ul class="flex-grow-1">
           <li>

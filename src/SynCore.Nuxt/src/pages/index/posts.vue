@@ -40,7 +40,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="flex justify-content-center pt-4">
+  <div class="flex justify-content-center pt-4 h-full overflow-auto">
     <div style="width: 80%; max-width: 1000px;" class="flex flex-column gap-4">
       <Card class="shadow-none border-1 border-gray-200">
         <template #title>Crie um post</template>
