@@ -48,7 +48,6 @@ function handleAddTime() {
 
 function handleRemoveTime(t: ClassTime) {
   const i = times.value.indexOf(t)
-  console.log(i)
   times.value.splice(i, 1)
 }
 

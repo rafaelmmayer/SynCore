@@ -22,12 +22,24 @@ export function useApiClient() {
         return await axios.post('/api/posts', p)
     }
 
+    async function deletePost(id: string) {
+        return {}
+    }
+
+    async function addLike(id: string)  {
+        return {
+            id: '',
+        }
+    }
+
     return {
         getAllClasses,
         getClassesSchedule,
         addClass,
 
         getAllPosts,
-        addPost
+        addPost,
+        deletePost,
+        addLike
     }
 }
