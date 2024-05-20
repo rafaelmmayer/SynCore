@@ -1,5 +1,35 @@
 import axios from "axios";
-import type {Class, DayOfWeekSchedule} from "~/types";
+import type {ChatMessage, Class, DayOfWeekSchedule, SecondaryUser} from "~/types";
+import {v4 as uuidv4} from 'uuid';
+
+const users: SecondaryUser[] = [
+    {
+        id: uuidv4(),
+        name: "Willian Mayrink"
+    },
+    {
+        id: uuidv4(),
+        name: "Luan Bregunce"
+    },
+    {
+        id: uuidv4(),
+        name: "João Valente"
+    },
+    {
+        id: uuidv4(),
+        name: "Victor Emanuel"
+    },
+    {
+        id: uuidv4(),
+        name: "Bruno Alecio"
+    }
+]
+
+const message: ChatMessage[] = []
+
+function getUser(name: string) {
+    return users.find((user) => user.name === name);
+}
 
 export function useApiClient() {
     async function getAllClasses() {
@@ -32,6 +62,42 @@ export function useApiClient() {
         }
     }
 
+    async function getAllUsers() {
+        return users
+    }
+
+    async function getChatMessages(toId: string)
+    {
+        const authUser = useAuthUser()
+
+        return [...message, ...[{
+                id: uuidv4(),
+                to: {
+                    id: authUser.user!.id!,
+                    name: authUser.user!.name!
+                },
+                owner: {
+                    id: getUser('João Valente')!.id,
+                    name: getUser('João Valente')!.name,
+                },
+                text: 'vou bem e com voce?'
+            }]]
+            .map(m => {
+                console.log(m)
+                return m
+            })
+            .filter(m => {
+                const owner = m.owner.id == authUser.user!.id || m.owner.id == toId
+                const to = m.to.id == authUser.user!.id || m.to.id == toId
+
+                return owner || to
+            })
+    }
+
+    async function addChatMessage(m: ChatMessage) {
+        message.push(m)
+    }
+
     return {
         getAllClasses,
         getClassesSchedule,
@@ -40,6 +106,11 @@ export function useApiClient() {
         getAllPosts,
         addPost,
         deletePost,
-        addLike
+        addLike,
+
+        getAllUsers,
+
+        getChatMessages,
+        addChatMessage
     }
 }

@@ -65,3 +65,15 @@ export interface ClassSchedule {
     endMinute: string
     endTime: string
 }
+
+export interface SecondaryUser {
+    id: string,
+    name: string
+}
+
+export interface ChatMessage {
+    id: string,
+    text: string,
+    owner: SecondaryUser,
+    to: SecondaryUser
+}

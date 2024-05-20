@@ -16,6 +16,7 @@ export function useAuthUser() {
         if (res.data && res.data.length > 0) {
             user = new User(res.data)
             isAuthenticated = true
+            console.log(user)
         }
     }
 
