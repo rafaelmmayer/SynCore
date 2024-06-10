@@ -80,7 +80,7 @@ export function useApiClient() {
                     id: getUser('João Valente')!.id,
                     name: getUser('João Valente')!.name,
                 },
-                text: 'vou bem e com voce?'
+                text: 'Olá. tudo bem com você?'
             }]]
             .map(m => {
                 console.log(m)

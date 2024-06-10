@@ -105,7 +105,7 @@ function handleAddClass() {
           <Card v-for="t in times" class="border-1 border-gray-300 shadow-none " :pt="{ body: 'custom-card-body' }">
             <template #content>
               <div class="flex align-items-center justify-content-between">
-                <div>Horário: {{t.startHour}}h{{t.startHour}} - {{t.endHour}}h{{t.endMinute}}</div>
+                <div>Horário: {{t.startHour}}h{{t.startMinute}} - {{t.endHour}}h{{t.endMinute}}</div>
                 <Button
                     icon="pi pi-times"
                     text

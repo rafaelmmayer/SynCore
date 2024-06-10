@@ -1,8 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="7575ac82-8a6f-4ba5-886c-3005ffed75b4" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/docker-compose.app.yaml" beforeDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SynCore.Core/Entities/ChatMessage.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SynCore.Core/Entities/Comments.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/SynCore.Core/Entities/Likes.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SynCore.Api/Data/AppDbContext.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/SynCore.Api/Data/AppDbContext.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SynCore.Api/Migrations/AppDbContextModelSnapshot.cs" beforeDir="false" afterPath="$PROJECT_DIR$/src/SynCore.Api/Migrations/AppDbContextModelSnapshot.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SynCore.Nuxt/src/components/Sidebars/AddClassSidebar.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/SynCore.Nuxt/src/components/Sidebars/AddClassSidebar.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SynCore.Nuxt/src/components/TabsPanels/ClassesRegistrationTab.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/SynCore.Nuxt/src/components/TabsPanels/ClassesRegistrationTab.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SynCore.Nuxt/src/composables/useApiClient.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/SynCore.Nuxt/src/composables/useApiClient.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SynCore.Nuxt/src/pages/auth/signup.vue" beforeDir="false" afterPath="$PROJECT_DIR$/src/SynCore.Nuxt/src/pages/auth/signup.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SynCore.Nuxt/src/pinia/classesStore.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/SynCore.Nuxt/src/pinia/classesStore.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/SynCore.Nuxt/src/types/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/SynCore.Nuxt/src/types/index.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -12,9 +26,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 2
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
   <component name="ProjectId" id="2falfFcpnwe6pCncevgx4DNfXD4" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -22,17 +36,26 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "RunOnceActivity.OpenDatabaseViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "database.data.extractors.current.export.id": "Comma-separated (CSV)_id",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "C:/Users/rafael.mayer/dev/puc/SynCore/src/SynCore.Nuxt",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Rafael Mayer/dev/SynCore/docs",
     "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "preferences.pluginManager",
     "vue.rearranger.settings.migration": "true"
+  },
+  "keyToStringList": {
+    "DatabaseDriversLRU": [
+      "postgresql"
+    ]
   }
 }]]></component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-js-predefined-1d06a55b98c1-2e7d6887c066-JavaScript-WS-241.15989.47" />
+        <option value="bundled-js-predefined-1d06a55b98c1-91d5c284f522-JavaScript-WS-241.15989.105" />
       </set>
     </attachedChunks>
   </component>
@@ -45,6 +68,7 @@
       <option name="presentableId" value="Default" />
       <updated>1714047170987</updated>
       <workItem from="1714047172008" duration="78000" />
+      <workItem from="1717968753919" duration="19000" />
     </task>
     <servers />
   </component>

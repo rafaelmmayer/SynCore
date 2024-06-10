@@ -34,7 +34,8 @@ export interface Class {
     isActive: boolean
     times: ClassTime[]
     userId?: string
-    id?: string
+    id?: string,
+    edit: boolean
 }
 
 export interface ClassTime {

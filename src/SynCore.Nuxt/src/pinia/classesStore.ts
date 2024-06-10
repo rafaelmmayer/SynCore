@@ -31,12 +31,17 @@ export const useClassesStore = defineStore('classes', () => {
         await loadClassesSchedule()
     }
 
+    function removeClass(c: Class) {
+        classes.value.splice(classes.value.indexOf(c), 1)
+    }
+
     return {
         classes,
         classesSchedule,
 
         loadClasses,
         loadClassesSchedule,
-        addClass
+        addClass,
+        removeClass
     }
 })
